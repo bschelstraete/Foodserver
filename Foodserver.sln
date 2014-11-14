@@ -1,0 +1,60 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Foodserver", "http://localhost:58285", "{5672C178-8FC4-4391-B8F3-5184C26FD3FB}"
+	ProjectSection(WebsiteProperties) = preProject
+		SccProjectName = "SAK"
+		SccAuxPath = "SAK"
+		SccLocalPath = "SAK"
+		SccProvider = "SAK"
+		UseIISExpress = "true"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_58285"
+		Debug.AspNetCompiler.PhysicalPath = "Foodserver\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_58285\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_58285"
+		Release.AspNetCompiler.PhysicalPath = "Foodserver\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_58285\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		SlnRelativePath = "Foodserver\"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://bru-teamfound.hogeschool-wvl.be:8080/tfs/projects2013
+		SccLocalPath0 = .
+		SccWebProject1 = true
+		SccProjectUniqueName1 = http://localhost:58285
+		SccProjectName1 = Foodserver
+		SccLocalPath1 = http://localhost:58285/
+		SccProjectEnlistmentChoice1 = 2
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		DebugTest|Any CPU = DebugTest|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5672C178-8FC4-4391-B8F3-5184C26FD3FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5672C178-8FC4-4391-B8F3-5184C26FD3FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5672C178-8FC4-4391-B8F3-5184C26FD3FB}.DebugTest|Any CPU.ActiveCfg = Debug|Any CPU
+		{5672C178-8FC4-4391-B8F3-5184C26FD3FB}.DebugTest|Any CPU.Build.0 = Debug|Any CPU
+		{5672C178-8FC4-4391-B8F3-5184C26FD3FB}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{5672C178-8FC4-4391-B8F3-5184C26FD3FB}.Release|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

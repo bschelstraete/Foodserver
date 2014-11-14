@@ -1,0 +1,10 @@
+********** 6/03/2014 14:04:44 **********
+Exception Type: System.Exception
+Exception: Er is een probleem ontdekt. De administrators zijn al op de hoogte gebracht.
+Source: customErrors section - Web.config
+Stack Trace: 
+********** 6/03/2014 14:21:38 **********
+Exception Type: System.Exception
+Exception: Er is een probleem ontdekt. De administrators zijn al op de hoogte gebracht.
+Source: customErrors section - Web.config
+Stack Trace: 

@@ -1,0 +1,485 @@
+﻿/* ---------- ALGEMEEN ---------- */
+body {
+    background-color:#F9F9F9;
+    color:#212121;
+}
+
+/*h4 {
+    background-color: #D0D0D0;
+    font-weight:bold;
+}*/
+
+/* PANEL */
+.panel {
+    border-radius:0;
+}
+
+.panel-default > .panel-heading {
+    background-color:#4C708D;
+    border-radius:0;
+    color:white;
+    border:none;
+}
+
+.panel-title {
+    font-size:18px;
+    padding-bottom:6px;
+    padding-top:6px;
+}
+
+/* BUTTON */
+.btn {
+    border-radius:0;
+}
+
+.btn-info {
+    background-color:#4F94CD;
+    border-color:#4F94CD;
+}
+
+.btn-info:hover {
+    background-color:#3e80b6;
+    border-color:#3e80b6;
+}
+
+.btn-danger {
+    background-color:#4cb04d;
+    border-color:#4cb04d;
+}
+
+.btn-danger:hover
+{
+    background-color:#42a543;
+    border-color:#42a543;
+}
+
+/* --------- LOGIN --------- */
+.alert {
+    padding:3px;
+    margin-bottom:5px;
+    text-align:center;
+}
+
+#loginPanel {
+    padding-bottom:0;
+}
+
+#loginPanel span {
+    position:absolute;
+}
+
+#loginInfo {
+    text-align:center;
+    font-size:small;
+}
+
+#loginInfo a {
+    color:black;
+}
+
+/*---------- MEDIA -----------*/
+@media (min-width: 1250px) {
+  .container {
+    width: 1100px;
+  }
+  .navbar-brand {
+    left:12%;
+    position:absolute;
+  }
+}
+
+@media (min-width: 1300px) {
+  .container {
+    width: 1150px;
+  }
+  .navbar-brand {
+    left:11.9%;
+    position:absolute;
+  }
+}
+
+@media (min-width: 1350px) {
+  .container {
+    width: 1200px;
+  }
+  .navbar-brand {
+    left:11.8%;
+    position:absolute;
+  }
+}
+
+@media (min-width: 1400px) {
+  .container {
+    width: 1250px;
+  }
+  .navbar-brand {
+    left:11.6%;
+    position:absolute;
+  }
+}
+
+@media (min-width: 1450px) {
+  .container {
+    width: 1300px;
+  }
+  .navbar-brand {
+    left:11.6%;
+    position:absolute;
+  }
+}
+
+@media (min-width: 1500px) {
+  .container {
+    width: 1350px;
+  }
+  .navbar-brand {
+    left:11.6%;
+    position:absolute;
+  }
+}
+
+@media (min-width: 1550px) {
+  .container {
+    width: 1400px;
+  }
+  .navbar-brand {
+    left:11.4%;
+    position:absolute;
+  }
+}
+
+@media (min-width: 1600px) {
+  .container {
+    width: 1450px;
+  }
+  .navbar-brand {
+    left:11.3%;
+    position:absolute;
+  }
+}
+
+@media (min-width: 1650px) {
+  .container {
+    width: 1500px;
+  }
+  .navbar-brand {
+    left:11.5%;
+    position:absolute;
+  }
+}
+
+@media (min-width: 1700px) {
+  .container {
+    width: 1550px;
+  }
+  .navbar-brand {
+    left:11.5%;
+    position:absolute;
+  }
+}
+
+@media (min-width: 1900px) {
+  .container {
+    width: 1750px;
+  }
+  .navbar-brand {
+    left:12%;
+    position:absolute;
+  }
+}
+
+/* ---------- ABOUT ---------- */
+#divAbout {
+    margin-top:10px;
+}
+
+.backButton {
+    color:white;
+    font-size:15px;
+    float:right;
+    margin-right:1%;
+}
+
+.backButton:hover {
+    color:black;
+    text-decoration:none;
+}
+
+/* --------- NAVBAR ---------- */
+.navbar-default {
+    background-color: #34495E;
+    border:none;
+    border-radius:0;
+    padding-top:10px;
+    padding-bottom:10px;
+}
+
+.navbar-nav{
+    margin: 0 auto;
+    display: table;
+    table-layout: fixed;
+    float:none;
+}
+
+/* NAV LINK */
+.navbar-default .navbar-nav > li > a {
+    color:white;
+    font-weight:bold;
+    font-size:small;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+    color:black;
+}
+
+/* NAV BRAND */
+.navbar-brand {
+    padding:1px 0px 1px 20px;
+}
+
+/* NAV DROPDOWN */
+.dropdown-menu {
+    background-color:#34495E;
+    border-top:none;
+}
+
+.dropdown-menu li a {
+    color:white;
+    font-weight:bold;
+}
+
+.dropdown-menu li a:hover {
+    background-color:#34495E;
+}
+
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+    background-color:#34495E;
+    color:white;
+}
+
+/* ---------- PANEL ---------- */
+.pnlExtra {
+    padding-bottom:0;
+}
+
+/* ---------- GEGEVENS ---------- */
+.lblMoney {
+    font-weight:bold;
+}
+
+#spanLogOut {
+    float:right; 
+    font-size:22px;
+}
+
+#spanLogOut:hover {
+    color:black;
+}
+
+/* ---------- FOOTER --------- */
+.navbar-fixed-bottom {
+    background-color:#34495E;
+    color:white;
+}
+
+.navbar-fixed-bottom a {
+    color:white;
+}
+
+/* ------------ MAIN BESTELLEN ---------- */
+.pnlBestellen {
+    padding-top:0;
+    padding-bottom:0;
+}
+
+.pnlBestellen span {
+    margin-left:4px;
+}
+
+.txtAantal {
+    text-align:center;
+}
+
+.lblError {
+    text-align:center !important;
+    margin-top:5px !important;
+    padding-bottom:0.5em !important;
+}
+
+/* ---------- MYORDERS ---------- */
+
+.chkEmail label {
+    font-weight:normal;
+}
+
+.chkEmail input[type="checkbox"] {
+    margin-left:5px;
+    margin-right:8px;
+}
+
+/**/
+
+.nav-tabs {
+    margin-left:1px;
+}
+
+.nav-tabs > li {
+    margin-bottom:-2px;
+}
+
+/*#frmMain {
+    padding-left:20px;
+    padding-right:20px;
+}*/
+
+#HeadLogin {
+    font-weight:bold;
+    text-align:center;
+}
+
+#About {
+    float:left;
+    margin:5px 0px 5px 10px;
+    font-size:small;
+}
+
+#Copy {
+    float:right;
+    margin:5px 10px 5px 0px;
+    font-size:small;
+}
+
+#btnVerwijder {
+    margin-top:5px;
+}
+
+.lblBold
+{
+    font-weight:bold;
+}
+
+.feedbackDiv
+{
+    margin-bottom:50px;
+}
+
+.divError {
+    margin-top:10px;    
+}
+
+.calDel {
+    background-color:#F9F9F9;
+    color:#212121;
+    /*font-weight:bold;*/
+}
+
+.calDel .ajax__calendar_container {
+    width:250px;
+}
+
+.calDel .ajax__calendar_day {
+    width:30px;
+}
+
+.calDel .ajax__calendar_header {
+    background-color:#3973A3;
+}
+
+.calDel .ajax__calendar_dayname {
+    color:black;
+    text-align:center;
+}
+
+.calDel .ajax__calendar_footer {
+    color:black;
+}
+
+.calDel .ajax__calendar_invalid .ajax__calendar_day {
+    color:red;
+}
+
+/* ---------- WEEKMENU SIDE ---------- */
+
+#cph_MainContent_weekmenuDiv {
+    margin-left:10px;
+}
+
+#cph_MainContent_weekmenuDiv span {
+    font-weight:bold;
+    position:absolute;
+}
+
+.spanDate {
+    font-size:3em;
+    color:#CCC;
+}
+
+#cph_MainContent_weekmenuDiv ul {
+    list-style-type: none;
+}
+
+.divWeekdag {
+    border-bottom:1px solid #ccc;
+}
+
+.divDag {
+    padding-left:0;
+    padding-right:0;
+}
+
+.spanDag {
+    color: #6f6f6f;
+    margin-top:50px;
+    font-size:11px; 
+    margin-left:5px;
+}
+
+.lbtnWeekmenu {
+    color:#212121;
+    text-decoration:none;
+}
+
+.lbtnWeekmenu:hover{
+   color: #212121;
+   text-decoration:none;
+}
+
+/* ---------- WEEKMENU --------- */
+#weekmenuRSS span {
+    position:absolute;
+}
+
+#weekmenuSJS span {
+    position:absolute;
+}
+
+.pnlFoodAdmin span {
+    text-align:left !important;
+}
+
+#weekmenuCampus {
+    text-align:center;
+}
+
+.calKitchen th {
+    text-align:center !important;
+}
+
+/* ---------- Gebruikers Administratie ---------- */
+
+#cph_MainContent_divUser label {
+    text-align:left;
+}
+
+#cph_MainContent_divUser span {
+    text-align:left;
+}
+
+.lbtnMyOrders {
+    color:white;
+    background-color:#4C708D;
+}
+
+.NoShow{
+    display:none;
+}

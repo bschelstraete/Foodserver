@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="https://services.howest.be/Howest.Identity.Web.Service/v1.1/Facade.asmx?wsdl" docRef="https://services.howest.be/Howest.Identity.Web.Service/v1.1/Facade.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="https://services.howest.be/Howest.Identity.Web.Service/v1.1/Facade.asmx" xmlns:q1="http://services.howest.be/" binding="q1:Identity_x005F_x0020_Management_x005F_x0020_WebserviceSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="https://services.howest.be/Howest.Identity.Web.Service/v1.1/Facade.asmx" xmlns:q2="http://services.howest.be/" binding="q2:Identity_x005F_x0020_Management_x005F_x0020_WebserviceSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>
