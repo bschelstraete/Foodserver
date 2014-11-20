@@ -21,10 +21,6 @@ public partial class WeeklyMenuAdministration : System.Web.UI.Page
             Server.Transfer("Main.aspx");
         }
 
-
-
-
-
         LoadDates();
         if (!IsPostBack)
         {
@@ -38,11 +34,6 @@ public partial class WeeklyMenuAdministration : System.Web.UI.Page
             }
         }
         MakeWeeklyMenuIfNotExist();
-
-
-
-
-
         LoadTable();
     }
 
@@ -70,43 +61,18 @@ public partial class WeeklyMenuAdministration : System.Web.UI.Page
         }
     }
 
-    private void GetMeals()
-    {
-        for (int i = 0; i < RSSBoxes.Count; i++)
-        {
-            RSSBoxes[i].Text = Database.DatabaseInstance.GetMenu(days[i], "RSS").ToString();
-        }
-        for (int i = 0; i < SJSBoxes.Count; i++)
-        {
-            SJSBoxes[i].Text = Database.DatabaseInstance.GetMenu(days[i], "SJS").ToString();
-        }
-    }
-
+    
     private void LoadTable()
     {
         WeeklyMenuHtml menu = new WeeklyMenuHtml();
         days = menu.GetDays(Cal_Menu.SelectedDate);
-        //LoadDates();
     }
     protected void Cal_Menu_SelectionChanged(object sender, EventArgs e)
     {
-        //LoadTable();
-        //GetMeals();
         MakeWeeklyMenuIfNotExist();
         GridView1.DataBind();
     }
-    protected void Btn_Submit_Click(object sender, EventArgs e)
-    {
-        for (int i = 0; i < RSSBoxes.Count; i++)
-        {
-            Database.DatabaseInstance.InsertMenu(days[i], RSSBoxes[i].Text, "RSS");
-        }
-        for (int i = 0; i < SJSBoxes.Count; i++)
-        {
-            Database.DatabaseInstance.InsertMenu(days[i], SJSBoxes[i].Text, "SJS");
-        }
-        GetMeals();
-    }
+    
     protected void Cal_Menu_DayRender(object sender, DayRenderEventArgs e)
     {
         if (e.Day.IsWeekend)

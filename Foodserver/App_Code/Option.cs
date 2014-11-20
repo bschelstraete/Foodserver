@@ -14,7 +14,7 @@ public class Option
     private string optionname;
     private bool enabled;
     private decimal price;
-    private List<string> Campussen { get; set; }
+    public List<string> Campussen { get; set; }
 
     #endregion
 

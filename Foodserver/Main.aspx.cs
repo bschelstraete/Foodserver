@@ -56,7 +56,7 @@ public partial class Main : System.Web.UI.Page
         for (int i = 1; i < 6; i++)
         {
             HtmlGenericControl span = (HtmlGenericControl)weekmenuDiv.FindControl("spanDag" + i);
-            span.InnerHtml = days[i-1].ToString("dd MMMM");
+            span.InnerHtml = days[i - 1].ToString("dd MMMM");
 
             HtmlGenericControl ul = (HtmlGenericControl)weekmenuDiv.FindControl("ulDag" + i);
             string[] weekmenu = Database.DatabaseInstance.GetMenu(days[i - 1], campus).ToString().Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
@@ -109,7 +109,7 @@ public partial class Main : System.Web.UI.Page
 
     private void DisplayMeals()
     {
-        BestelPanel();    
+        BestelPanel();
         SelecteerMaaltijd();
     }
 
@@ -117,7 +117,7 @@ public partial class Main : System.Web.UI.Page
     {
         campusLbl.Text = CampusText(Session["campus"].ToString());
         cph = (ContentPlaceHolder)this.Master.FindControl("cph_MainContent"); //is nodig
-        
+
         calex = new CalendarExtender();
         calex.TargetControlID = deliveryDateText.ID;
         calex.CssClass = "calDel";
@@ -176,12 +176,18 @@ public partial class Main : System.Web.UI.Page
     {
         ddlOptions.Items.Clear();
         string campus = Session["campus"].ToString();
-        foreach (Option option in Database.DatabaseInstance.GetOptionsForMeal(int.Parse(ddlMeals.SelectedItem.Value), campus))
+        if (ddlMeals.SelectedIndex != -1)
         {
-            if (option.Enabled)
+            foreach (Option option in Database.DatabaseInstance.GetOptionsForMeal(int.Parse(ddlMeals.SelectedItem.Value), campus))
             {
-                ddlOptions.Items.Add(new ListItem(option.Optionname, option.Optionid.ToString()));
+                if (option.Enabled)
+                {
+                    ddlOptions.Items.Add(new ListItem(option.Optionname, option.Optionid.ToString()));
+                }
             }
+        }
+        else {
+        ddlOptions.Items.Add(new ListItem("nog geen opties beschikbaar", "NA"));
         }
     }
 
@@ -366,7 +372,7 @@ public partial class Main : System.Web.UI.Page
         string id = ((LinkButton)sender).ID;
         DateTime[] days = new DateTime[5];
         days = GetDays();
-        
+
         switch (id)
         {
             case "lbtnDag1":
@@ -406,7 +412,7 @@ public partial class Main : System.Web.UI.Page
                 {
                     break;
                 }
-                
+
                 deliveryDateText.Text = days[4].ToShortDateString();
                 ddlMeals.SelectedIndex = 0;
                 break;
@@ -428,9 +434,9 @@ public partial class Main : System.Web.UI.Page
             return false;
         }
         else
-	    {
+        {
             return true;
-	    }
+        }
     }
 
     public DateTime[] GetDays()

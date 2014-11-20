@@ -1004,14 +1004,18 @@ public class Database
         {
             
                 DateTime startOfWeek = getForstDateTimeOfWeek(date);
+            int weeklyMenuCount = (int)taWeeklyMenu.WeeklyMenuCountForDataAndCampus(startOfWeek, campus.Id);
+            if (weeklyMenuCount != 5)
+            {
+
                 for (int i = 0; i < 5; i++)
                 {
                     
                     taWeeklyMenu.InsertMenu(startOfWeek.AddDays(i).ToShortDateString(), "", campus.Id);
                 }
 
+            }
                       
-                        
         }
 
     }
@@ -1019,7 +1023,7 @@ public class Database
     public bool weeklyMenuExists(DateTime date)
     {
         int menuCount = (int)taWeeklyMenu.WeeklyMenuCountForDate(date);
-        if ((int)taWeeklyMenu.WeeklyMenuCountForDate(date) == (5*taCampus.getCampusCount() ))
+        if ((int)taWeeklyMenu.WeeklyMenuCountForDate(date) == (5 * taCampus.getCampusCount()))
         {
             return true;
         }
@@ -1029,7 +1033,7 @@ public class Database
     private DateTime getForstDateTimeOfWeek(DateTime date)
     {
         System.Globalization.CultureInfo cultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
-        DayOfWeek firstDayOfWeek = cultureInfo.DateTimeFormat.FirstDayOfWeek;
+        DayOfWeek firstDayOfWeek = DayOfWeek.Monday;
         DayOfWeek today = date.DayOfWeek;
         return date.AddDays(-(today - firstDayOfWeek)).Date;
     }
@@ -1104,10 +1108,11 @@ public class Database
         }
     }
 
-    public void CopyWeeklyMenu(DateTime date, Campus campusFrom, List<Campus> campusListTo) {
+    public void CopyWeeklyMenu(DateTime date, Campus campusFrom, List<Campus> campusListTo)
+    {
         DateTime startOfWeek = getForstDateTimeOfWeek(date);
 
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i <= 5; i++)
         {
             foreach (Campus campus in campusListTo)
             {
@@ -1117,10 +1122,24 @@ public class Database
                 {
                     taWeeklyMenu.UpdateMenu(startOfWeek.AddDays(i).ToShortDateString(), ds.WeeklyMenu[0].Meal, campus.Id);
                 }
-                catch (Exception e) {
+                catch (Exception e)
+                {
                     taWeeklyMenu.UpdateMenu(startOfWeek.AddDays(i).ToShortDateString(), "", campus.Id);
                 }
             }
         }
     }
+
+    public void CreateNewCampus(string CampusId, string CampusName)
+    {
+        taCampus.InsertCampus(CampusId, CampusName);
+        }
+
+    public void UpdateMotd(string motd)
+    {
+        taMotd.UpdateMotd(motd);
+
+    }
+
+
 }

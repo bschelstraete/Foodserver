@@ -16,18 +16,18 @@
     <link href="CSS/Bootstrap.css" rel="stylesheet" type="text/css" />
     <link href="CSS/Site.css" rel="stylesheet" type="text/css" />
     <%-- Google analytics code --%>
-        <script>
-            (function (i, s, o, g, r, a, m) {
-                i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                    (i[r].q = i[r].q || []).push(arguments)
-                }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-            ga('create', 'UA-49449189-1', 'auto');
-            ga('send', 'pageview');
+        ga('create', 'UA-49449189-1', 'auto');
+        ga('send', 'pageview');
 
-</script>
+    </script>
 
 </head>
 <body>
@@ -43,7 +43,7 @@
                             <span class="icon-bar"></span>
                         </button>
                         <a href="Main.aspx">
-                            <img class="navbar-brand" src="Images/Howest (T).png"/>
+                            <img class="navbar-brand" src="Images/Howest (T).png" />
                         </a>
                     </div>
 
@@ -51,7 +51,7 @@
                         <ul class="nav navbar-nav">
                             <li><a href="Main.aspx">Maaltijd bestellen</a></li>
                             <li><a href="MyOrders.aspx">Mijn bestellingen</a></li>
-<%--                            <li><a href="Payment.aspx">Krediet</a></li>--%>
+                            <%--                            <li><a href="Payment.aspx">Krediet</a></li>--%>
                             <li><a id="kitchen" runat="server" visible="false" href="Kitchen.aspx">Keuken</a></li>
                             <li id="dropdown" runat="server" visible="false" class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administratie <b class="caret"></b></a>
@@ -59,6 +59,7 @@
                                     <li><a href="UserAdministration.aspx">Gebruiker administratie</a></li>
                                     <li><a href="FoodAdministration.aspx">Maaltijden administratie</a></li>
                                     <li><a href="WeeklyMenuAdministration.aspx">Weekmenu administratie</a></li>
+                                    <li><a href="CampusAdministration.aspx">Campus administratie</a></li>
                                     <li><a href="FeedbackPage.aspx">Feedback</a></li>
                                     <li><a href="ErrorListPage.aspx">Errors</a></li>
                                 </ul>
@@ -72,8 +73,7 @@
                     <div class="col-md-3 col-md-push-9">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title">
-                                    Gegevens
+                                <h3 class="panel-title">Gegevens
                                     <asp:LinkButton ID="lbtn_Logout" runat="server" OnClick="LogOut">
                                         <span id="spanLogOut" class="glyphicon glyphicon-off"></span>
                                     </asp:LinkButton>
@@ -99,24 +99,24 @@
                                     </div>
 
                                 </div>
-   
-                                </div>
+
                             </div>
+                        </div>
                         <div class="panel panel-default feedbackDiv hidden-sm hidden-xs">
                             <div class="panel-heading">
                                 <h3 class="panel-title">Feedback</h3>
                             </div>
                             <div class="panel-body pnlExtra">
                                 <div class="form-group">
-                                        <div class="col-sm-12">
-                                            <asp:TextBox ID="txtFeedback" runat="server" Rows="7" TextMode="MultiLine" CssClass="txtFeedback" Width="100%" style="resize:none" 
-                                                            Placeholder="Heeft u fouten gevonden of opmerkingen over deze applicatie, gelieve het ons via deze weg te laten weten.">
-                                            </asp:TextBox>
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <asp:Button ID="btnSend" runat="server" Text="Verstuur feedback" CssClass="btn btn-info form-control btnFeedback" OnClick="lbtn_Feedback_Click" />
-                                        </div>
-                                        <asp:Label ID="lblConfirm" runat="server" Text="" ForeColor="Green"></asp:Label>
+                                    <div class="col-sm-12">
+                                        <asp:TextBox ID="txtFeedback" runat="server" Rows="7" TextMode="MultiLine" CssClass="txtFeedback" Width="100%" Style="resize: none"
+                                            Placeholder="Heeft u fouten gevonden of opmerkingen over deze applicatie, gelieve het ons via deze weg te laten weten.">
+                                        </asp:TextBox>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <asp:Button ID="btnSend" runat="server" Text="Verstuur feedback" CssClass="btn btn-info form-control btnFeedback" OnClick="lbtn_Feedback_Click" />
+                                    </div>
+                                    <asp:Label ID="lblConfirm" runat="server" Text="" ForeColor="Green"></asp:Label>
                                 </div>
                             </div>
                         </div>

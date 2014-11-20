@@ -26,7 +26,11 @@ public partial class Admin : System.Web.UI.Page
             Btn_Adminsitratie_Click(sender, e);
             divNewMeal.Visible = true;
             divNewOptionMeal.Visible = false;
+            divNewOption.Visible = true;
+            divNewOptionNewMeal.Visible = false;
+
             divAlert.Visible = false;
+            divNewOptionAlert.Visible = false;
             divEditPagina.Visible = false;
             divEditNewOption.Visible = false;
             divEditConfirmation.Visible = false;
@@ -38,13 +42,21 @@ public partial class Admin : System.Web.UI.Page
     }
 
     private void resetAddOptionPage()
-    { 
-    
+    {
+        divNewOptionAlert.Visible = false;
+        txtNewOptionname.Text = "";
+        txtNewOptionprice.Text = "";
+        lblNewOptionnameError.Text = "";
+        lblNewOptionpriceError.Text = "";
+        lblOptionNewMealError.Text = "";
+        lblOptionNewMealPriceError.Text = "";
     }
 
     private void resetAddMealPage()
     {
         divAlert.Visible = false;
+        txtMealNaam.Text = "";
+        txtMealPrijs.Text = "";
         lblMealNaamError.Text = "";
         lblMealPrijsError.Text = "";
         lblOptionNaamError.Text = "";
@@ -67,12 +79,23 @@ public partial class Admin : System.Web.UI.Page
         lblNewMealPrijsError.Text = "";
     }
 
+    private void addOptionConfirmation()
+    {
+        divNewOptionAlert.Visible = true;
+        resetAddOptionPage();
+        addNewOptionPage.Visible = false;
+        divNewOptionNewMeal.Visible = false;
+        adminIndex.Visible = true;
+    }
+
 
     protected void BtnAddNewMealPage_Click(object sender, EventArgs e)
     {
         adminIndex.Visible = false;
         addNewMealPage.Visible = true;
         addNewOptionPage.Visible = false;
+        divNewMeal.Visible = true;
+        divNewOptionMeal.Visible = false;
     }
 
     protected void BtnAddNewOptionPage_Click(object sender, EventArgs e)
@@ -80,15 +103,19 @@ public partial class Admin : System.Web.UI.Page
         adminIndex.Visible = false;
         addNewMealPage.Visible = false;
         addNewOptionPage.Visible = true;
+        divNewOption.Visible = true;
+        divNewOptionNewMeal.Visible = false;
     }
 
     //Navigatie - tabs
+
     protected void Btn_Adminsitratie_Click(object sender, EventArgs e)
     {
         overviewAdmin.Visible = true;
         overviewMaaltijden.Visible = false;
         overviewOpties.Visible = false;
         AddCheckboxCampus(cblMealCampus);
+        AddCheckboxCampus(cblNewOptioncampus);
 
         adminIndex.Visible = true;
         addNewMealPage.Visible = false;
@@ -99,10 +126,18 @@ public partial class Admin : System.Web.UI.Page
         li_OverzichtOptie.Attributes.Add("class", "");
         headerTitle.InnerHtml = "Administratie maaltijden";
         resetAddMealPage();
+        resetAddOptionPage();
 
         //Om te vermijden dat er data te kort is (wanneer net toegevoed)
+        ddlOpties.Items.Clear();
         ddlOpties.DataSource = Database.DatabaseInstance.GetVisibleOptions();
         ddlOpties.DataBind();
+
+        ddlNewAddMeal.Items.Clear();
+        ddlNewAddMeal.Items.Add(new ListItem() { Value = "-1", Text = "Selecteer een toe te voegen maaltijd" });
+        ddlNewAddMeal.DataSource = Database.DatabaseInstance.GetVisibleMeals();
+        ddlNewAddMeal.DataBind();
+
         PopulateListMeals();
         PopulateListOptions();
     }
@@ -161,7 +196,9 @@ public partial class Admin : System.Web.UI.Page
             Meal newMeal = new Meal(mealName, mealPrice, true, campusList);
 
             AddNewMealWithOption(newMeal, newOption);
-            ResetDivsWithConfirmation();
+            Btn_Adminsitratie_Click(sender, e);
+            divAlert.Visible = true;
+            divNewOptionAlert.Visible = false;
         }
         else if (!ValidateNaam(txtMealNaam))
         {
@@ -186,16 +223,19 @@ public partial class Admin : System.Web.UI.Page
         else if (!ValidateNaam(txtMealNaam))
         {
             lblMealNaamError.Visible = true;
+            lblMealNaamError.Text = "Gelieve een naam in te geven";
             lblMealNaamError.Style.Add("color", "red");
         }
         else if (!ValidatePrijs(txtMealPrijs))
         {
             lblMealPrijsError.Visible = true;
+            lblMealPrijsError.Text = "Gelieve een geldige prijs in te geven";
             lblMealPrijsError.Style.Add("color", "red");
         }
     }
     protected void Btn_AddNewOption_Click(object sender, EventArgs e)
     {
+        resetAddOptionPage();
         if (ValidateNaam(txtOptionNaam) && ValidatePrijs(txtOptionPrijs))
         {
             string mealName = txtMealNaam.Text;
@@ -213,7 +253,9 @@ public partial class Admin : System.Web.UI.Page
             AddNewMealWithOption(newMeal, newOptionId);
 
             //resetten van het venster met confirmatie
-            ResetDivsWithConfirmation();
+            Btn_Adminsitratie_Click(sender, e);
+            divAlert.Visible = true;
+            divNewOptionAlert.Visible = false;
         }
         else if (!ValidateNaam(txtOptionNaam))
         {
@@ -228,6 +270,28 @@ public partial class Admin : System.Web.UI.Page
             lblOptionPrijsError.Style.Add("color", "red");
         }
     }
+
+    protected void BtnNewOptionAddMeal_Click(object sender, EventArgs e)
+    {
+        if (ValidateNaam(txtNewOptionname) && ValidatePrijs(txtNewOptionprice))
+        {
+            divNewOption.Visible = false;
+            divNewOptionNewMeal.Visible = true;
+        }
+        else if (!ValidateNaam(txtNewOptionname))
+        {
+            lblNewOptionnameError.Visible = true;
+            lblNewOptionnameError.Text = "Gelieve een naam in te vullen";
+            lblNewOptionnameError.Style.Add("color", "red");
+        }
+        else if (!ValidatePrijs(txtNewOptionprice))
+        {
+            lblMealPrijsError.Visible = true;
+            lblNewOptionnameError.Text = "Gelieve een geldige prijs in te vullen";
+            lblMealPrijsError.Style.Add("color", "red");
+        }
+    }
+
     protected void Btn_CancelAddOption_Click(object sender, EventArgs e)
     {
         txtOptionNaam.Text = "";
@@ -236,6 +300,48 @@ public partial class Admin : System.Web.UI.Page
         divNewOptionMeal.Visible = false;
     }
 
+    //Nieuwe optie toevoegen
+    protected void btn_SaveNewOption_Click(object sender, EventArgs e)
+    {
+        resetAddOptionPage();
+        if (ValidateNaam(txtNewOptionname) && ValidatePrijs(txtNewOptionprice))
+        {
+            string optionName = txtNewOptionname.Text;
+            decimal optionPrice = 0.0M;
+            decimal.TryParse(txtNewOptionprice.Text, out optionPrice);
+            List<string> campusList = new List<string>();
+
+            campusList = GetSelectedCampussen(cblNewOptioncampus);
+            Option newOption = new Option(optionName, true, optionPrice, campusList);
+
+            if (ddlNewAddMeal.SelectedValue != "-1")
+            {
+                int addMeal = Database.DatabaseInstance.GetMealByMealname(ddlNewAddMeal.SelectedValue).Mealid;
+                AddNewOptionWithMeal(newOption, addMeal);
+            }
+            else
+            {
+                Database.DatabaseInstance.insertOptions(newOption.Optionname, newOption.Enabled, newOption.Price, newOption.Campussen);
+            }
+              
+            Btn_Adminsitratie_Click(sender, e);
+            divNewOptionAlert.Visible = true;
+        }
+        else if (!ValidateNaam(txtNewOptionname))
+        {
+            lblNewOptionnameError.Visible = true;
+            lblNewOptionnameError.Text = "Gelieve een naam in te vullen";
+            lblNewOptionnameError.Style.Add("color", "red");
+        }
+        else if (!ValidatePrijs(txtNewOptionprice))
+        {
+            lblNewOptionpriceError.Visible = true;
+            lblNewOptionpriceError.Text = "Gelieve een geldige prijs in te vullen";
+            lblNewOptionpriceError.Style.Add("color", "red");
+        }
+    }
+
+    //overzicht Maaltijd & Opties
     protected void ListMeals_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
         ListMeals.PageIndex = e.NewPageIndex;
@@ -266,6 +372,13 @@ public partial class Admin : System.Web.UI.Page
         return false;
     }
 
+    private void AddNewOptionWithMeal(Option option, int mealId)
+    {
+        Database.DatabaseInstance.insertOptions(option.Optionname, option.Enabled, option.Price, option.Campussen);
+        int addedOption = Database.DatabaseInstance.GetLatestOption();
+        Database.DatabaseInstance.insertMeal_options(mealId, addedOption);
+    }
+
     private void AddNewMealWithOption(Meal newMeal, int optionId)
     {
         Database.DatabaseInstance.insertMeal(newMeal.Mealname, newMeal.Price, newMeal.Enabled, newMeal.CampusList);
@@ -273,17 +386,6 @@ public partial class Admin : System.Web.UI.Page
         int addedMeal = Database.DatabaseInstance.GetLatestMeal();
 
         Database.DatabaseInstance.insertMeal_options(addedMeal, optionId);
-    }
-
-    private void ResetDivsWithConfirmation()
-    {
-        divAlert.Visible = true;
-        txtMealNaam.Text = "";
-        txtMealPrijs.Text = "";
-        txtOptionNaam.Text = "";
-        txtOptionPrijs.Text = "";
-        divNewMeal.Visible = true;
-        divNewOptionMeal.Visible = false;
     }
 
     private void PopulateListMeals()
@@ -747,12 +849,17 @@ public partial class Admin : System.Web.UI.Page
     }
 
     private void StartDeleteOption(Option option)
-    { }
+    {
+        Database.DatabaseInstance.setOptionInvisible(option.Optionid);
+        PopulateListOptions();
+    }
     #endregion EditOptions
 
-    protected void btnCancelNewMeal_Click(object sender, EventArgs e)
+    protected void BtnCancelNewMeal_Click(object sender, EventArgs e)
     {
         adminIndex.Visible = true;
+        resetAddMealPage();
+        resetAddOptionPage();
         addNewMealPage.Visible = false;
         addNewOptionPage.Visible = false;
     }
