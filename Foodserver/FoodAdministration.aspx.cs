@@ -46,6 +46,10 @@ public partial class Admin : System.Web.UI.Page
         divNewOptionAlert.Visible = false;
         txtNewOptionname.Text = "";
         txtNewOptionprice.Text = "";
+        txtOptionNewMeal.Text = "";
+        txtOptionNewMealPrice.Text = "";
+        lblOptionNewMealError.Text = "";
+        lblOptionNewMealPriceError.Text = "";
         lblNewOptionnameError.Text = "";
         lblNewOptionpriceError.Text = "";
         lblOptionNewMealError.Text = "";
@@ -57,6 +61,10 @@ public partial class Admin : System.Web.UI.Page
         divAlert.Visible = false;
         txtMealNaam.Text = "";
         txtMealPrijs.Text = "";
+        txtOptionNaam.Text = "";
+        txtOptionPrijs.Text = "";
+        lblOptionNaamError.Text = "";
+        lblOptionPrijsError.Text = "";
         lblMealNaamError.Text = "";
         lblMealPrijsError.Text = "";
         lblOptionNaamError.Text = "";
@@ -116,6 +124,7 @@ public partial class Admin : System.Web.UI.Page
         overviewOpties.Visible = false;
         AddCheckboxCampus(cblMealCampus);
         AddCheckboxCampus(cblNewOptioncampus);
+        AddCheckboxCampus(cblOptionNewMealCampus);
 
         adminIndex.Visible = true;
         addNewMealPage.Visible = false;
@@ -129,6 +138,14 @@ public partial class Admin : System.Web.UI.Page
         resetAddOptionPage();
 
         //Om te vermijden dat er data te kort is (wanneer net toegevoed)
+
+        PopulateDropdownlists();
+        PopulateListMeals();
+        PopulateListOptions();
+    }
+
+    private void PopulateDropdownlists()
+    {
         ddlOpties.Items.Clear();
         ddlOpties.DataSource = Database.DatabaseInstance.GetVisibleOptions();
         ddlOpties.DataBind();
@@ -138,9 +155,12 @@ public partial class Admin : System.Web.UI.Page
         ddlNewAddMeal.DataSource = Database.DatabaseInstance.GetVisibleMeals();
         ddlNewAddMeal.DataBind();
 
-        PopulateListMeals();
-        PopulateListOptions();
+        ddlOptionNewMealOption.Items.Clear();
+        ddlOptionNewMealOption.Items.Add(new ListItem() { Value = "-1", Text = "Selecteer een toe te voegen optie" });
+        ddlOptionNewMealOption.DataSource = Database.DatabaseInstance.GetVisibleOptions();
+        ddlOptionNewMealOption.DataBind();
     }
+
     protected void Btn_OverzichtMaaltijd_Click(object sender, EventArgs e)
     {
         overviewAdmin.Visible = false;
@@ -290,6 +310,64 @@ public partial class Admin : System.Web.UI.Page
             lblNewOptionnameError.Text = "Gelieve een geldige prijs in te vullen";
             lblMealPrijsError.Style.Add("color", "red");
         }
+    }
+
+    protected void SaveNewOptionWithNewMeal(object sender, EventArgs e)
+    {
+        if (ValidateNaam(txtOptionNewMeal) && ValidatePrijs(txtOptionNewMealPrice))
+        {
+            string optionNaam = txtNewOptionname.Text;
+            decimal optionPrice = 0M;
+            decimal.TryParse(txtOptionNewMealPrice.Text, out optionPrice);
+            bool optionEnabled = chbNewOptionEnabled.Enabled;
+            List<string> optionCampussen = GetSelectedCampussen(cblNewOptioncampus);
+            Option option = new Option(optionNaam, optionEnabled, optionPrice, optionCampussen);
+
+            string mealNaam = txtOptionNewMeal.Text;
+            decimal mealPrice = 0M;
+            decimal.TryParse(txtOptionNewMealPrice.Text, out mealPrice);
+            List<string> mealCampussen = GetSelectedCampussen(cblOptionNewMealCampus);
+            Meal meal = new Meal(mealNaam, mealPrice, true, mealCampussen);
+
+            if (ddlOptionNewMealOption.SelectedValue != "-1")
+            {
+                int addOptionid = Database.DatabaseInstance.GetOptionByOptionName(ddlOptionNewMealOption.SelectedValue).Optionid;
+                AddNewMealWithOption(meal, addOptionid);
+            }
+            else
+            {
+                Database.DatabaseInstance.insertMeal(meal.Mealname, meal.Price, meal.Enabled, meal.CampusList);
+            }
+
+            if (ddlNewAddMeal.SelectedValue != "-1")
+            {
+                int addMeal = Database.DatabaseInstance.GetMealByMealname(ddlNewAddMeal.SelectedValue).Mealid;
+                AddNewOptionWithMeal(option, addMeal);
+                Database.DatabaseInstance.insertMeal_options(Database.DatabaseInstance.GetLatestMeal(), Database.DatabaseInstance.GetLatestOption());
+            }
+            else
+            {
+                int mealId = Database.DatabaseInstance.GetLatestMeal();
+                AddNewOptionWithMeal(option, mealId);
+            }
+
+            Btn_Adminsitratie_Click(sender, e);
+            divNewOptionAlert.Visible = true;
+        }
+        if (!ValidateNaam(txtOptionNewMeal))
+        {
+            lblOptionNewMealError.Visible = true;
+            lblOptionNewMealError.Text = "Gelieve een naam in te vullen";
+            lblOptionNewMealError.Style.Add("color", "red");
+        }
+        if (!ValidatePrijs(txtOptionNewMealPrice))
+        {
+            txtOptionNewMealPrice.Text = "";
+            lblOptionNewMealPriceError.Visible = true;
+            lblOptionNewMealPriceError.Text = "Gelieve een geldige prijs in te vullen";
+            lblOptionNewMealPriceError.Style.Add("color", "red");
+        }
+
     }
 
     protected void Btn_CancelAddOption_Click(object sender, EventArgs e)
@@ -862,5 +940,14 @@ public partial class Admin : System.Web.UI.Page
         resetAddOptionPage();
         addNewMealPage.Visible = false;
         addNewOptionPage.Visible = false;
+    }
+
+    protected void BackToNewOption(object sender, EventArgs e)
+    {
+        txtOptionNewMeal.Text = "";
+        txtOptionNewMealPrice.Text = "";
+        divNewOption.Visible = true;
+        divNewOptionNewMeal.Visible = false;
+
     }
 }

@@ -148,10 +148,10 @@
 
                                 <div id="AddOptionButtons" class="form-group">
                                     <div class="col-sm-6">
-                                        <asp:Button ID="btnSaveNewOptionAndMeal" Text="Maaltijd en optie toevoegen" runat="server" CssClass="btn btn-success form-control" />
+                                        <asp:Button ID="btnSaveNewOptionAndMeal" OnClick="SaveNewOptionWithNewMeal" Text="Maaltijd en optie toevoegen" runat="server" CssClass="btn btn-success form-control" />
                                     </div>
                                     <div class="col-sm-6">
-                                        <asp:Button ID="btnBackToNewOption" Text="Terug" runat="server" CssClass="btn btn-danger form-control" />
+                                        <asp:Button ID="btnBackToNewOption" OnClick="BackToNewOption" Text="Terug" runat="server" CssClass="btn btn-danger form-control" />
                                     </div>
                                 </div>
                                 <br />
@@ -350,8 +350,6 @@
                         </div>
                     </div>
                 </div>
-
-
             </div>
         </div>
     </div>
